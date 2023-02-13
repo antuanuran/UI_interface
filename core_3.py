@@ -1,16 +1,17 @@
 from time import sleep
 
 
-def dounload_photos(url, amount, printer: callable = None):
+def dounload_photos(url, amount, printer):
     printer(f'получен url: {url} и количество: {amount}')
-    sleep(2)
+    sleep(1)
     printer("Функция dounload_photos отработала")
 
-def upload_photos(printer: callable = None):
-    sleep(2)
+def upload_photos(printer):
+    sleep(1)
     printer("Функция upload_photos отработала")
 
-def run_core(*args, printer: callable = None):
-    dounload_photos(*args, printer)
+def run_core(url, amount, printer):
+    dounload_photos(url, amount, printer)
     upload_photos(printer)
+
 

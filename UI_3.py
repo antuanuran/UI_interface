@@ -1,7 +1,5 @@
-
 import tkinter as tk
 from core_3 import run_core
-
 
 class App (tk.Tk):
     def __init__(self):
@@ -15,7 +13,7 @@ class App (tk.Tk):
 
         # Название строки ввода
         self.name_url = tk.Label(self.frame, text='Ник VK')
-        self.name_url.grid(column=0, row=0, padx=10, pady=10)
+        self.name_url.grid(column=1, row=0, padx=10, pady=10)
 
         # Добавляем во Фрейм окно ввода
         self.url = tk.Entry(self.frame)
