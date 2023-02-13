@@ -1,5 +1,10 @@
 import tkinter as tk
 from core_3 import run_core
+import VK
+import YD
+import configparser
+import json
+from time import sleep
 
 class App (tk.Tk):
     def __init__(self):
