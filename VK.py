@@ -4,11 +4,12 @@ import datetime
 
 class VkPhoto:
 
-    def __init__(self, token):
+    def __init__(self, token, printer):
         self.token_str = token
         self.url_get_id = 'https://api.vk.com/method/users.get'
         self.url_get_photos = 'https://api.vk.com/method/photos.get'
         self.url_get = 'https://cloud-api.yandex.net/v1/disk/resources/upload'
+        self.printer = printer
 
     def screen_id(self, screen_result):
         params = {
@@ -23,7 +24,7 @@ class VkPhoto:
             # Проверка запроса-ответа
             response = requests.get(self.url_get_id, params=params).status_code
             if response == 200:
-                print("\nзапрос 1 выполнен (никнейм переведен в id)...")
+                self.printer("\nзапрос 1 выполнен (никнейм переведен в id)...")
             else:
                 exit(f"На этапе проверки перевода никнейма в id произошла ошибка, код ошибки: {response}! Перезапустите программу")
 
@@ -39,7 +40,7 @@ class VkPhoto:
 
     def photo_id(self, screen_result):
         id_numb = self.screen_id(screen_result)
-        print(f'(id) - {id_numb}')
+        self.printer(f'(id) - {id_numb}')
         params = {
             'access_token': self.token_str,
             'owner_id': id_numb,
@@ -52,7 +53,7 @@ class VkPhoto:
 
         response = requests.get(self.url_get_photos, params=params).status_code
         if response == 200:
-            print("\nзапрос 2 выполнен (получены данные из VK)...")
+            self.printer("\nзапрос 2 выполнен (получены данные из VK)...")
         else:
             exit(f"На этапе получения данных из VK произошла ошибка, код ошибки {response}! Перезапустите программу")
 

@@ -36,11 +36,11 @@ def dounload_photos(url, amount, printer):
     sleep(2)
 
     # Запуск Метода VK
-    vk_instance = VK.VkPhoto(token_VK)
+    vk_instance = VK.VkPhoto(token_VK, printer)
     dict_VK_result = vk_instance.date_like_name_all(screen_VK)
 
     # Запуск Метода YaDisk
-    yadisk_instance = YD.LoadYadisk(token_YaDisk)
+    yadisk_instance = YD.LoadYadisk(token_YaDisk, printer)
     yadisk_instance.create_folder(name_folder_YaDisk)
 
     # Загрузка на yaDisk + проверка на кол-во фото

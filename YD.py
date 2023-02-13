@@ -2,7 +2,7 @@ import requests
 
 
 class LoadYadisk:
-    def __init__(self, token_YD):
+    def __init__(self, token_YD, printer):
         self.token_YD = token_YD
         self.headers = {
             'Content-Type': 'application/json',
@@ -10,6 +10,7 @@ class LoadYadisk:
         }
         self.url_get_file = 'https://cloud-api.yandex.net/v1/disk/resources/upload'
         self.url_get_folder = 'https://cloud-api.yandex.net/v1/disk/resources'
+        self.printer = printer
 
     def create_folder(self, name_folder):
         params = {
@@ -18,7 +19,7 @@ class LoadYadisk:
         response = requests.put(self.url_get_folder, headers=self.headers, params=params)
 
         if (response.status_code == 409 or response.status_code == 201 or response.status_code == 200) :
-            print("\nзапрос 3 выполнен (папка на Яндекс диске создана)...")
+            self.printer("\nзапрос 3 выполнен (папка на Яндекс диске создана)...")
         else:
             exit(f"На этапе создания папки произошла ошибка, код ошибки {response.status_code}! Перезапустите программу")
 
@@ -30,7 +31,7 @@ class LoadYadisk:
         response = requests.post(self.url_get_file, headers=self.headers, params=params)
 
         if response.status_code == 202:
-            print("\nзапрос выполнен (файл загружен)...")
+            self.printer("\nзапрос выполнен (файл загружен)...")
         else:
             exit(f"На этапе загрузки файла произошла ошибка, код ошибки {response.status_code}! Перезапустите программу")
 
