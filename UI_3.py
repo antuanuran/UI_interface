@@ -43,8 +43,7 @@ class App (tk.Tk):
         amount = int(self.spin.get())
         run_core(url, amount, printer=self.update_res)
 
-        text = 'Успешное выполнение'
-        self.update_res(text)
+        self.update_res('Успешное выполнение')
         return
 
 
