@@ -1,4 +1,5 @@
 import requests
+from time import sleep
 
 
 class LoadYadisk:
@@ -20,6 +21,7 @@ class LoadYadisk:
 
         if (response.status_code == 409 or response.status_code == 201 or response.status_code == 200) :
             self.printer("\nзапрос 3 выполнен (папка на Яндекс диске создана)...")
+            sleep(2)
         else:
             exit(f"На этапе создания папки произошла ошибка, код ошибки {response.status_code}! Перезапустите программу")
 
@@ -32,6 +34,7 @@ class LoadYadisk:
 
         if response.status_code == 202:
             self.printer("\nзапрос выполнен (файл загружен)...")
+            sleep(2)
         else:
             exit(f"На этапе загрузки файла произошла ошибка, код ошибки {response.status_code}! Перезапустите программу")
 

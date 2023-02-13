@@ -20,8 +20,7 @@ def name_result(result_info_json):
 
 
 
-
-def dounload_photos(url, amount, printer):
+def run_core(url, amount, printer):
     # Загрузка с config.ini
     config = configparser.ConfigParser()
     config.read("config.ini")
@@ -32,7 +31,7 @@ def dounload_photos(url, amount, printer):
     screen_VK = url
     count_photo = amount
 
-    printer(f'получен НИК VK: {screen_VK} и количество загружаемых фото: {count_photo}')
+    printer(f'Ник:{screen_VK} и Кол-во фото: {count_photo}')
     sleep(2)
 
     # Запуск Метода VK
@@ -51,31 +50,20 @@ def dounload_photos(url, amount, printer):
 
         if count < count_photo:
             yadisk_instance.upload_file_post(name, url)
-            print(name)
+            printer(name)
             count += 1
 
     if count_photo == count:
+        sleep(2)
         printer("\nВсе фото успешно загружены!")
     else:
-        printer(
-            "\nПрограмма успешно загрузила все фото профиля. Вами было введено количество, превышающее фото в профиле.")
+        sleep(2)
+        printer("\nПрограмма успешно загрузила все фото профиля. Вами было введено количество, превышающее фото в профиле.")
 
     # Запуск Метода информационного файла загрузки данных
     name_result(dict_VK_result)
     yadisk_instance.upload_file_info(f'{name_folder_YaDisk}/info_files.json', 'info_files.json')
 
-    printer("Функция dounload_photos отработала")
 
-
-
-def upload_photos(printer):
-    sleep(2)
-    printer("Работа завершена")
-
-
-
-def run_core(url, amount, printer):
-    dounload_photos(url, amount, printer)
-    upload_photos(printer)
 
 

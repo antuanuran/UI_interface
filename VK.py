@@ -1,5 +1,7 @@
 import requests
 import datetime
+from time import sleep
+
 
 
 class VkPhoto:
@@ -25,6 +27,7 @@ class VkPhoto:
             response = requests.get(self.url_get_id, params=params).status_code
             if response == 200:
                 self.printer("\nзапрос 1 выполнен (никнейм переведен в id)...")
+                sleep(2)
             else:
                 exit(f"На этапе проверки перевода никнейма в id произошла ошибка, код ошибки: {response}! Перезапустите программу")
 
@@ -41,6 +44,7 @@ class VkPhoto:
     def photo_id(self, screen_result):
         id_numb = self.screen_id(screen_result)
         self.printer(f'(id) - {id_numb}')
+        sleep(2)
         params = {
             'access_token': self.token_str,
             'owner_id': id_numb,
@@ -54,6 +58,7 @@ class VkPhoto:
         response = requests.get(self.url_get_photos, params=params).status_code
         if response == 200:
             self.printer("\nзапрос 2 выполнен (получены данные из VK)...")
+            sleep(2)
         else:
             exit(f"На этапе получения данных из VK произошла ошибка, код ошибки {response}! Перезапустите программу")
 
